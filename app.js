@@ -4,6 +4,7 @@ const mysql = require("mysql");
 const util = require('util');
 require('dotenv').config();
 const methodOverride = require('method-override')
+const fileUplaod = require("express-fileupload")
 
 
 
@@ -13,7 +14,7 @@ const app = express()
 
 ////ejs 
 app.set('view engine' , 'ejs');
-
+app.use(fileUplaod())
 
 // Middleware
 app.use(express.json())
@@ -81,14 +82,49 @@ app.get("/categories/post", (req, res) => {
 })
 app.post("/categories/post", async (req, res) => {
 
+        if(!req.files){
+                return res.status(400).send('no files were uplaod');
+        }
+        
         const name = req.body.name
         const Ename = req.body.Ename
+        const imageUplaod = req.files.image
+        const image = `publics/images/${imageUplaod.name}`
 
-        await query("INSERT INTO factories (name) VALUE ('"+ name +"')")
-        await query("INSERT INTO energies (name) VALUE ('"+ Ename +"')")
+       
+                if(imageUplaod.mimetype === "image/jpeg" || imageUplaod.mimetype === "image/jpg" || imageUplaod.mimetype ===" image/gif" || imageUplaod.mimetype === "image/png"){
+                        imageUplaod.mv(`publics/images/${imageUplaod.name}`, async function(err) {
+                                if (err){
+                                        return res.status(500).send(err);                                       
+                                }
+                                try{
+                                await query("INSERT INTO cars (name, image ) VALUES (?,?);", [name, image])
+                                res.redirect("/")
+                                // res.send('File uploaded!');
+                                }catch(err){
+                                res.send(err)
+                                }
+                              
+                              
+                              
+                        });
+                            
 
-        res.redirect("/")
+                }else {
+                message = "fichier invalide"
+                res.render("post", {message})
+                }
+                // console.log(imageUplaod);
+                // await query("INSERT INTO factories (name) VALUE ('"+ name +"')")
+                // await query("INSERT INTO energies (name) VALUE ('"+ Ename +"')")
+               
+                // res.send("ok")
+                
+        
+
+
 })
+
 app.delete("/categories/delete/:id", async (req, res) => {
 
         const id = req.params.id

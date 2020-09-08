@@ -5,15 +5,25 @@
     <div class="row">
         <div class="col-md-12">
 
-            <form method="POST" action="/categories/post">
+            <form method="POST" action="/categories/post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label > Constructeur</label>
                     <input type="text" class="form-control" name="name">
                     <!-- <small class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
+
+
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Example file input</label>
+                    <input type="file" class="form-control-file" name="image">
+                </div>
+
+
+
                 <div class="form-group">
                     <label >Carburant</label>
                     <input type="text" class="form-control" name="Ename" >
+                    
                 </div>
                
                 <button type="submit" class="btn btn-success">Ajouter</button>
