@@ -1,0 +1,43 @@
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% factories.forEach(function(factory) {%>
+        <tr>
+
+              <th scope="row"><%= factory.id %> </th>
+              <td><%= factory.name %> </td>
+              
+          </tr>
+      <%});%>
+
+  </tbody>
+</table>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    
+    <% energies.forEach(function(energy) {%>
+        <tr>
+
+              <th scope="row"><%= energy.id %></th>
+              <td><%= energy.name %></td>
+      
+          </tr>
+      <%});%>
+
+  </tbody>
+</table>

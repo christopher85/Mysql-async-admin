@@ -1,0 +1,70 @@
+<%- include ("./partials/header.ejs") %> 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% factories.forEach(function(factory) {%>
+          <tr>
+  
+                <th scope="row" style="width: 100px;"><%= factory.id %> </th>
+                <td style="width: 100px;"><%= factory.name %>  </td>
+
+                <form action="post" action="/categories/delete/<%= factory.id %>?_method=delete">
+                     <td style="width: 100px;"><button type="submit" class="btn btn-danger">X</button></td>
+                </form>
+               
+                
+            </tr>
+        <%});%>
+  
+    </tbody>
+  </table>
+  
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% energies.forEach(function(energy) {%>
+          <tr>
+  
+                <th scope="row" style="width: 100px;"><%= energy.id %></th>
+                <td style="width: 100px;"><%= energy.name %></td>
+
+
+                <form action="post" action="/categories/delete/<%= energy.id %>?_method=delete">
+                    <td style="width: 100px;"><button type="submit" class="btn btn-danger">X</button></td>
+               </form>
+        
+            </tr>
+        <%});%>
+  
+    </tbody>
+  </table>
+
+      
+    </tbody>
+  </table>
+        </div>
+    </div>
+</div>
+
+
+  <%- include ("./partials/footer.ejs") %> 
