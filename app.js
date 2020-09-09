@@ -99,6 +99,7 @@ app.post("/categories/post", async (req, res) => {
                                 }
                                 try{
                                 await query("INSERT INTO cars (name, image ) VALUES (?,?);", [name, image])
+                                console.log(1);
                                 res.redirect("/")
                                 // res.send('File uploaded!');
                                 }catch(err){
